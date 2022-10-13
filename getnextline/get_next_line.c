@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl_ex.c                                           :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clecat <clecat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 12:02:56 by clecat            #+#    #+#             */
-/*   Updated: 2022/10/13 13:01:45 by clecat           ###   ########.fr       */
+/*   Created: 2022/10/13 15:53:54 by clecat            #+#    #+#             */
+/*   Updated: 2022/10/13 16:55:20 by clecat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#include "get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
-#include "gnl_ex.h"
-
-char *get_next_line(int fd)
+//pour compiler : gcc -DBUFFER_SIZE = 5
+char    *get_next_line(int fd)
 {
-    int 	i = 0;
-    int 	rd = 0;
-    char	character;
-    char 	*buffer = malloc(10000);
+    int i = 0;
+    int rd = 0;
+    char character;
+    char *buffer = malloc(BUFFER_SIZE);
 
-    while ((rd = read(fd, &character, 1)) > 0)
+    if(!fd || !BUFFER_SIZE)
+        return(NULL);
+    while((rd = read(fd, &character, 1)) > 0 && (i < BUFFER_SIZE))
     {
-        buffer[i++] = character;
-        if (character == '\n')
+        buffer[i] = character;
+        if(character == '\n')
             break;
+        i++;
     }
-    if ((!buffer[i - 1] && !rd) || rd == -1)
+    if((!buffer[i] && !rd) || rd == -1)
     {
         free(buffer);
-        return (NULL);
+        return(NULL);
     }
-    buffer[i] =  '\0';
+    buffer[i + 1] = '\0';
     return(buffer);
 }
 
@@ -42,8 +43,10 @@ int main(int argc, char **argv)
 {
     int fd;
     char *ret;
+    (void)argc;
     
     fd = open(argv[1], O_RDONLY);
-    ret = get_next_line(fd);
-    printf("%s\n", ret);
+    while((ret = get_next_line(fd)) != NULL)
+        printf("%s\n", ret);
+    return(0);
 }
