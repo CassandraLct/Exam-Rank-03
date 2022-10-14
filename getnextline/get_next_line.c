@@ -6,22 +6,23 @@
 /*   By: clecat <clecat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:53:54 by clecat            #+#    #+#             */
-/*   Updated: 2022/10/13 16:55:20 by clecat           ###   ########.fr       */
+/*   Updated: 2022/10/14 12:45:36 by clecat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
+
 //pour compiler : gcc -DBUFFER_SIZE = 5
 char    *get_next_line(int fd)
 {
     int i = 0;
     int rd = 0;
     char character;
-    char *buffer = malloc(BUFFER_SIZE);
+    char *buffer = malloc(BUFFER_SIZE + 1);
 
-    if(!fd || !BUFFER_SIZE)
+    if(!fd || BUFFER_SIZE < 1)
         return(NULL);
     while((rd = read(fd, &character, 1)) > 0 && (i < BUFFER_SIZE))
     {

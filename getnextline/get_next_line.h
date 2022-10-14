@@ -6,15 +6,15 @@
 /*   By: clecat <clecat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:54:17 by clecat            #+#    #+#             */
-/*   Updated: 2022/10/13 16:13:59 by clecat           ###   ########.fr       */
+/*   Updated: 2022/10/14 12:42:46 by clecat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
 
 char    *get_next_line(int fd);
 
