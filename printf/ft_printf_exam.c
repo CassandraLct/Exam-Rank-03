@@ -6,7 +6,7 @@
 /*   By: clecat <clecat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:21:48 by clecat            #+#    #+#             */
-/*   Updated: 2022/10/13 12:02:02 by clecat           ###   ########.fr       */
+/*   Updated: 2022/10/18 15:42:31 by clecat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,12 @@ int ft_printf(const char *lst, ...)
 	return(all);
 }
 
-int main()
+//main a ne pas rendre, et aucun leaks!
+/*int main()
 {
 	ft_printf("Bonjour %s%%%d%x\n", "jesuisa", 42, 16);
 	printf("Bonjour %s%%%d%x\n", "jesuisa", 42, 16);
 	write(1, "\n", 1);
 	ft_printf("bonjour%s%%%d%x\n", "jesuisseule", 16, 42);
 	printf("bonjour%s%%%d%x\n", "jesuisseule", 16, 42);
-}
+}*/
